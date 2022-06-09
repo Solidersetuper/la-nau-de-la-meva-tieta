@@ -1,7 +1,40 @@
+controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
+    projectile2 = sprites.createProjectileFromSprite(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . 2 2 2 . . . . . . . 
+        . . . . . 2 3 1 3 2 . . . . . . 
+        . . . . . 3 1 1 1 3 . . . . . . 
+        . . . . . 3 1 1 1 3 . . . . . . 
+        . . . . . 3 1 1 1 3 . . . . . . 
+        . . . . . 3 1 1 1 2 . . . . . . 
+        . . . . . 2 1 1 1 2 . . . . . . 
+        . . . . . 2 3 1 3 2 . . . . . . 
+        . . . . . . 3 1 3 . . . . . . . 
+        . . . . . . 2 1 2 . . . . . . . 
+        . . . . . . 2 1 2 . . . . . . . 
+        . . . . . . 2 1 2 . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, mySprite, 0, -50)
+    music.pewPew.play()
+})
+sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Player, function (sprite, otherSprite) {
+    Asteroid.destroy()
+    Asteroid.destroy(effects.confetti, 500)
+    info.changeScoreBy(1)
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Player, function (sprite, otherSprite) {
+    info.changeLifeBy(-1)
+    Asteroid.destroy(effects.fire, 500)
+    scene.cameraShake(4, 500)
+})
 let Asteroid: Sprite = null
+let projectile2: Sprite = null
+let mySprite: Sprite = null
 game.splash("LA NAU DE LA MEVA TIETA", "\"A\"TO START &\"B\"TO SHOOT")
 effects.starField.startScreenEffect()
-let mySprite = sprites.create(img`
+mySprite = sprites.create(img`
     .......ff.......
     ......f22f......
     .....f2222f.....
@@ -50,4 +83,6 @@ game.onUpdateInterval(1000, function () {
         . . c b d d d d d 5 5 5 b b . . 
         . . . c c c c c c c c b b . . . 
         `, mySprite, 50, 50)
+    Asteroid.x += randint(100, scene.screenWidth())
+    Asteroid.setKind(SpriteKind.Enemy)
 })
