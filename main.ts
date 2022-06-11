@@ -32,7 +32,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSp
 let Asteroid: Sprite = null
 let projectile: Sprite = null
 let mySprite: Sprite = null
-game.splash("SUBNAUTIC ADVENTURE", "\"A\"TO START &\"B\"TO SHOOT")
+game.splash("SUBNAUTICA ADVENTURE", "\"A\"TO START &\"B\"TO SHOOT")
 effects.bubbles.startScreenEffect()
 scene.setBackgroundImage(img`
     8fffffffffffffffffffffffff88fffff88ffff8998889999999989988888989999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
